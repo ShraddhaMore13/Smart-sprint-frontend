@@ -1,0 +1,16 @@
+Sprint 3 Features
+
+Task 1: User Profile Management
+Implement user profile management system with ability to update personal information, profile picture, and notification preferences. The system should include validation for all input fields and proper error handling.
+
+Priority: high
+
+Task 2: Email Notification System
+Develop email notification system for various events such as password reset, account verification, and profile updates. The system should support HTML emails and have a template management interface.
+
+Priority: medium
+
+Task 3: Admin Dashboard
+Create admin dashboard for managing users, viewing system statistics, and performing administrative actions. The dashboard should include charts and graphs for visual representation of data.
+
+Priority: high

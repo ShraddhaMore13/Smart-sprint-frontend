@@ -1,0 +1,4 @@
+title,description,priority,estimated_hours
+User Authentication,Implement secure user authentication with OAuth and password reset functionality.,high,24
+Database Schema,Design and implement database schema for user profiles.,medium,16
+API Endpoints,Create REST API endpoints for user management.,high,20

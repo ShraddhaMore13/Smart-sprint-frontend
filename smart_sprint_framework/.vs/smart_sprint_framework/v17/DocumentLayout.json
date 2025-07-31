@@ -1,0 +1,166 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\frontend\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\robust_document_processor.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\robust_document_processor.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\debug_specific_doc.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\debug_specific_doc.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\test.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\test.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\smart_sprint_system.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\smart_sprint_system.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\training_module.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\training_module.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\cli_interface.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\cli_interface.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:smart_sprint_framework\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.js",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\frontend\\src\\App.js",
+              "RelativeDocumentMoniker": "frontend\\src\\App.js",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\frontend\\src\\App.js",
+              "RelativeToolTip": "frontend\\src\\App.js",
+              "ViewState": "AgIAAHcEAAAAAAAAAAAqwH8EAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-31T01:55:37.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Sprint 3 Features.docx",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx",
+              "RelativeToolTip": "smart_sprint_framework\\sprint_documents\\Sprint 3 Features.docx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002149|",
+              "WhenOpened": "2025-07-28T20:49:11.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "robust_document_processor.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\robust_document_processor.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\robust_document_processor.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\robust_document_processor.py",
+              "RelativeToolTip": "smart_sprint_framework\\robust_document_processor.py",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAswJwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T21:02:34.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "debug_specific_doc.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\debug_specific_doc.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\debug_specific_doc.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\debug_specific_doc.py",
+              "RelativeToolTip": "smart_sprint_framework\\debug_specific_doc.py",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAswG4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T20:57:57.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "test.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\test.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\test.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\test.py",
+              "RelativeToolTip": "smart_sprint_framework\\test.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T20:53:31.274Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "smart_sprint_system.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\smart_sprint_system.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\smart_sprint_system.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\smart_sprint_system.py",
+              "RelativeToolTip": "smart_sprint_framework\\smart_sprint_system.py",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswBcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T20:44:00.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "training_module.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\training_module.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\training_module.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\training_module.py",
+              "RelativeToolTip": "smart_sprint_framework\\training_module.py",
+              "ViewState": "AgIAAEYBAAAAAAAAAAAcwF8BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T20:41:52.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "cli_interface.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\cli_interface.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\cli_interface.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\cli_interface.py",
+              "RelativeToolTip": "smart_sprint_framework\\cli_interface.py",
+              "ViewState": "AgIAAOwAAAAAAAAAAAAowP4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T20:37:49.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.py",
+              "DocumentMoniker": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\main.py",
+              "RelativeDocumentMoniker": "smart_sprint_framework\\main.py",
+              "ToolTip": "C:\\Users\\shrad\\source\\repos\\MS\\smart_sprint_framework\\smart_sprint_framework\\main.py",
+              "RelativeToolTip": "smart_sprint_framework\\main.py",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswA4AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-07-28T16:27:05.49Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

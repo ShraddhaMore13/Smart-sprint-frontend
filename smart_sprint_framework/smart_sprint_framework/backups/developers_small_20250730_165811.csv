@@ -1,0 +1,11 @@
+id,name,skills,availability,current_workload,experience_level
+1,John Smith,"[""python"", ""react"", ""mysql"", ""docker""]",40,0.0,4
+2,Sarah Johnson,"[""redis"", ""git"", ""mysql"", ""jenkins""]",40,0.0,1
+3,Mike Williams,"[""java"", ""spring"", ""postgresql"", ""docker""]",40,0.0,3
+4,Emma Davis,"[""javascript"", ""react"", ""node.js"", ""mongodb""]",40,0.0,4
+5,Alex Miller,"[""python"", ""django"", ""postgresql"", ""redis""]",40,0.0,5
+6,Lisa Brown,"[""java"", ""spring"", ""mysql"", ""kubernetes""]",40,0.0,3
+7,David Wilson,"[""typescript"", ""angular"", ""node.js"", ""mongodb""]",40,0.0,4
+8,Olivia Taylor,"[""python"", ""flask"", ""sqlite"", ""docker""]",40,31.0,2
+9,James Garcia,"[""c#"", "".net"", ""sql server"", ""azure""]",40,0.0,4
+10,Sophia Rodriguez,"[""php"", ""laravel"", ""mysql"", ""aws""]",40,0.0,3
