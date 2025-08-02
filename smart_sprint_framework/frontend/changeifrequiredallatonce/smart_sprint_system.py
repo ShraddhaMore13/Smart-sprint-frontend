@@ -24,6 +24,7 @@ from error_handler import (
     safe_execute, retry_operation
 )
 
+
 class SmartSprintSystem:
     def __init__(self):
         self.tickets = []
@@ -172,11 +173,6 @@ class SmartSprintSystem:
                 else:
                     ticket['status'] = str(ticket['status'])
                 
-                # FIX: Ensure logical flow - if ticket is assigned but status is backlog, set to in_progress
-                if ticket['assigned_to'] is not None and ticket['status'] == 'backlog':
-                    ticket['status'] = 'in_progress'
-                    print(f"Fixed ticket {ticket['id']} status: assigned but marked as backlog, changed to in_progress")
-                
                 # Add entities field if missing
                 if 'entities' not in ticket:
                     ticket['entities'] = {
@@ -187,7 +183,6 @@ class SmartSprintSystem:
                     }
                 
                 self.tickets.append(ticket)
-            
             print(f"Loaded {len(self.tickets)} tickets from sprint_documents_small.csv")
         except Exception as e:
             print(f"Warning: Could not load sprint_documents_small.csv: {e}")
@@ -279,28 +274,6 @@ class SmartSprintSystem:
         self.tickets.append(ticket_data)
         self.auto_save()
         return ticket_data
-    
-    def reset_ticket_ids(self):
-        """Reset ticket IDs to start from 1 and update performance data"""
-        # Sort tickets by current ID
-        sorted_tickets = sorted(self.tickets, key=lambda x: x['id'])
-        
-        # Create a mapping from old ID to new ID
-        id_mapping = {}
-        for new_id, ticket in enumerate(sorted_tickets, 1):
-            old_id = ticket['id']
-            id_mapping[old_id] = new_id
-            ticket['id'] = new_id
-        
-        # Update performance data
-        for metric in self.performance_tracker.metrics:
-            if metric['ticket_id'] in id_mapping:
-                metric['ticket_id'] = id_mapping[metric['ticket_id']]
-        
-        # Save the updated data
-        self.manual_save()
-        
-        return True
     
     def get_ticket_recommendations(self, ticket_id):
         """Get ticket recommendations with error handling"""
@@ -406,17 +379,11 @@ class SmartSprintSystem:
         return retry_operation(perform_assignment, max_attempts=3)
     
     def complete_ticket(self, ticket_id, completion_time, revisions, sentiment_score):
-        """Complete a ticket and update developer workload"""
         ticket = next((t for t in self.tickets if t['id'] == ticket_id), None)
         if not ticket:
             return False
         
-        # Check if ticket is assigned and in progress
         if ticket.get('assigned_to') is None:
-            return False
-        
-        # Check if ticket is in progress (logical flow requirement)
-        if ticket.get('status') != 'in_progress':
             return False
         
         developer_id = ticket['assigned_to']

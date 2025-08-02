@@ -1,5 +1,4 @@
 import datetime
-
 class PerformanceTracker:
     def __init__(self):
         self.metrics = []
@@ -11,7 +10,7 @@ class PerformanceTracker:
             'completion_time': completion_time,
             'revisions': revisions,
             'sentiment_score': sentiment_score,
-            'timestamp': datetime.datetime.now()
+            'timestamp': datetime.datetime.now().isoformat()
         }
         self.metrics.append(metric)
         return metric

@@ -172,11 +172,6 @@ class SmartSprintSystem:
                 else:
                     ticket['status'] = str(ticket['status'])
                 
-                # FIX: Ensure logical flow - if ticket is assigned but status is backlog, set to in_progress
-                if ticket['assigned_to'] is not None and ticket['status'] == 'backlog':
-                    ticket['status'] = 'in_progress'
-                    print(f"Fixed ticket {ticket['id']} status: assigned but marked as backlog, changed to in_progress")
-                
                 # Add entities field if missing
                 if 'entities' not in ticket:
                     ticket['entities'] = {
@@ -406,17 +401,11 @@ class SmartSprintSystem:
         return retry_operation(perform_assignment, max_attempts=3)
     
     def complete_ticket(self, ticket_id, completion_time, revisions, sentiment_score):
-        """Complete a ticket and update developer workload"""
         ticket = next((t for t in self.tickets if t['id'] == ticket_id), None)
         if not ticket:
             return False
         
-        # Check if ticket is assigned and in progress
         if ticket.get('assigned_to') is None:
-            return False
-        
-        # Check if ticket is in progress (logical flow requirement)
-        if ticket.get('status') != 'in_progress':
             return False
         
         developer_id = ticket['assigned_to']

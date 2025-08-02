@@ -1,6 +1,7 @@
 import datetime
 import numpy as np
 from collections import defaultdict, Counter
+import ast  # For parsing string representations of lists
 
 class DashboardDataGenerator:
     def __init__(self):
@@ -90,6 +91,23 @@ class DashboardDataGenerator:
             sentiment = perf_data.get('sentiment', 0)
             tickets_completed = perf_data.get('tickets_completed', 0)
             
+            # If we don't have performance data, generate some sample data
+            if velocity == 0 and tickets_completed == 0:
+                # Generate sample data for demonstration
+                velocity = np.random.uniform(8, 20)
+                accuracy = np.random.uniform(0.7, 0.95)
+                sentiment = np.random.uniform(0.6, 0.9)
+                tickets_completed = np.random.randint(3, 8)
+            
+            # Ensure skills are always a list
+            skills = dev['skills']
+            if isinstance(skills, str):
+                try:
+                    skills = ast.literal_eval(skills)
+                except (ValueError, SyntaxError):
+                    # If that fails, try splitting by comma
+                    skills = [skill.strip() for skill in skills.split(',')]
+            
             performance_metrics.append({
                 'developer_id': dev_id,
                 'developer_name': dev['name'],
@@ -97,7 +115,10 @@ class DashboardDataGenerator:
                 'velocity': round(velocity, 1),
                 'accuracy': round(accuracy * 100, 1),  # Convert to percentage
                 'sentiment': round(sentiment * 100, 1),  # Convert to percentage
-                'tickets_completed': tickets_completed
+                'tickets_completed': tickets_completed,
+                'availability': dev['availability'],
+                'current_workload': dev['current_workload'],
+                'skills': skills  # Ensure skills is a list
             })
         
         return performance_metrics
@@ -159,13 +180,18 @@ class DashboardDataGenerator:
         weeks = 8
         velocity_data = []
         
+        # Calculate average velocity from performance data
+        all_velocity = [perf.get('velocity', 0) for perf in performance_data.values() if perf.get('velocity', 0) > 0]
+        avg_velocity = np.mean(all_velocity) if all_velocity else 15  # Default if no data
+        
         for i in range(weeks):
             week_start = datetime.datetime.now() - datetime.timedelta(weeks=weeks-i)
             week_end = week_start + datetime.timedelta(days=7)
             
-            # Generate mock velocity data
-            planned_velocity = np.random.randint(30, 50)
-            actual_velocity = np.random.randint(20, planned_velocity + 10)
+            # Generate mock velocity data with some variation
+            variation = np.random.uniform(0.8, 1.2)
+            planned_velocity = round(avg_velocity * variation)
+            actual_velocity = round(planned_velocity * np.random.uniform(0.7, 1.1))
             
             velocity_data.append({
                 'week': f"Week {i+1}",
@@ -194,7 +220,15 @@ class DashboardDataGenerator:
             
             # Generate mock burndown data
             if remaining_work > 0:
-                completed_today = np.random.randint(0, min(10, int(remaining_work)))
+                # More work gets done in the middle of the sprint
+                if i < days * 0.3:
+                    progress_factor = 0.05
+                elif i < days * 0.7:
+                    progress_factor = 0.1
+                else:
+                    progress_factor = 0.15
+                
+                completed_today = min(remaining_work * progress_factor, remaining_work)
                 remaining_work -= completed_today
             else:
                 completed_today = 0

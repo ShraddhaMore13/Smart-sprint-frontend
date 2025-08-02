@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+
 const API_BASE_URL = 'http://localhost:5001';
+
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
@@ -35,9 +38,11 @@ const Dashboard = () => {
         };
         fetchDashboardData();
     }, []);
+
     if (loading) {
         return <div className="loading">Loading dashboard...</div>;
     }
+
     if (error) {
         return (
             <div className="error-container">
@@ -52,9 +57,11 @@ const Dashboard = () => {
             </div>
         );
     }
+
     if (!dashboardData) {
         return <div>No dashboard data available</div>;
     }
+
     if (!dashboardData.summary) {
         return (
             <div className="error-container">
@@ -64,8 +71,10 @@ const Dashboard = () => {
             </div>
         );
     }
+
     const { summary, developer_performance, priority_distribution,
-        complexity_analysis, workload_distribution } = dashboardData;
+        complexity_analysis, workload_distribution, velocity_tracking, burndown_data } = dashboardData;
+
     return (
         <div className="dashboard-view">
             <h2>Project Dashboard</h2>
@@ -183,11 +192,67 @@ const Dashboard = () => {
                         </div>
                     </div>
                 )}
-                {/* Velocity Tracking and Burndown Chart sections removed */}
+                {velocity_tracking && velocity_tracking.length > 0 && (
+                    <div className="chart-container">
+                        <h3>Velocity Tracking</h3>
+                        <div className="chart">
+                            <div className="line-chart">
+                                {velocity_tracking.map((week, index) => (
+                                    <div key={index} className="line-chart-point">
+                                        <div className="point-label">{week.week}</div>
+                                        <div className="point-container">
+                                            <div className="point planned" style={{ bottom: `${Math.min(100, week.planned_velocity / 50 * 100)}%` }} title={`Planned: ${week.planned_velocity}h`}></div>
+                                            <div className="point actual" style={{ bottom: `${Math.min(100, week.actual_velocity / 50 * 100)}%` }} title={`Actual: ${week.actual_velocity}h`}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="chart-legend">
+                                <div className="legend-item">
+                                    <div className="legend-color planned"></div>
+                                    <div>Planned Velocity</div>
+                                </div>
+                                <div className="legend-item">
+                                    <div className="legend-color actual"></div>
+                                    <div>Actual Velocity</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {burndown_data && burndown_data.length > 0 && (
+                    <div className="chart-container">
+                        <h3>Burndown Chart</h3>
+                        <div className="chart">
+                            <div className="burndown-chart">
+                                {burndown_data.map((day, index) => (
+                                    <div key={index} className="burndown-day">
+                                        <div className="day-label">{day.date.split('-')[2]}</div>
+                                        <div className="burndown-container">
+                                            <div className="burndown-ideal" style={{ height: `${Math.min(100, day.ideal_remaining / 100 * 100)}%` }}></div>
+                                            <div className="burndown-actual" style={{ height: `${Math.min(100, day.remaining_work / 100 * 100)}%` }}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="chart-legend">
+                                <div className="legend-item">
+                                    <div className="legend-color ideal"></div>
+                                    <div>Ideal Burndown</div>
+                                </div>
+                                <div className="legend-item">
+                                    <div className="legend-color actual"></div>
+                                    <div>Actual Burndown</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
 };
+
 function getPriorityColor(priority) {
     switch (priority) {
         case 'critical': return '#dc3545';
@@ -197,6 +262,7 @@ function getPriorityColor(priority) {
         default: return '#6c757d';
     }
 }
+
 function getComplexityColor(complexity) {
     switch (complexity) {
         case 1: return '#28a745';
@@ -207,4 +273,5 @@ function getComplexityColor(complexity) {
         default: return '#6c757d';
     }
 }
+
 export default Dashboard;

@@ -26,3 +26,26 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Visual Studio cache
+.vs/
+*.vsidx
+
+# Python cache/logs
+__pycache__/
+*.pyc
+*.log
+
+# Local error/output
+error_reports/
+backups/
+enc_temp_folder/
+
+# Windows reserved filename
+NUL
+
+# Optional duplicates/backups
+* (2).*
+* (3).*
+
+yarn.lock

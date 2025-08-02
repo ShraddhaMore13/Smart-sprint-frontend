@@ -1,7 +1,9 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Dashboard from './Dashboard';
+
 const API_BASE_URL = 'http://localhost:5001';  // Make sure this matches your backend port
+
 function App() {
     const [tickets, setTickets] = useState([]);
     const [developers, setDevelopers] = useState([]);
@@ -30,6 +32,7 @@ function App() {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [authError, setAuthError] = useState(null);
+
     // Fix: Include apiRequest in the dependency array
     const apiRequest = useCallback(async (url, options = {}) => {
         const headers = {
@@ -41,20 +44,25 @@ function App() {
             headers,
         });
     }, [token]);
+
     const fetchInitialData = useCallback(async () => {
         if (!isAuthenticated) return;
+
         try {
             const [ticketsResponse, developersResponse, statusResponse] = await Promise.all([
                 apiRequest(`${API_BASE_URL}/api/tickets`),
                 apiRequest(`${API_BASE_URL}/api/developers`),
                 apiRequest(`${API_BASE_URL}/api/system/status`)
             ]);
+
             if (!ticketsResponse.ok || !developersResponse.ok || !statusResponse.ok) {
                 throw new Error('Failed to fetch data');
             }
+
             const ticketsData = await ticketsResponse.json();
             const developersData = await developersResponse.json();
             const statusData = await statusResponse.json();
+
             const uniqueTickets = removeDuplicateTickets(ticketsData);
             setTickets(uniqueTickets);
             setDevelopers(developersData);
@@ -69,11 +77,13 @@ function App() {
             setLoading(false);
         }
     }, [isAuthenticated, apiRequest]);  // Added apiRequest to dependencies
+
     useEffect(() => {
         if (isAuthenticated) {
             fetchInitialData();
         }
     }, [isAuthenticated, fetchInitialData]);
+
     useEffect(() => {
         const verifyToken = async () => {
             if (token) {
@@ -83,6 +93,7 @@ function App() {
                             'Authorization': `Bearer ${token}`,
                         },
                     });
+
                     if (response.ok) {
                         setIsAuthenticated(true);
                         // We don't have user info from token verification, so we'll set a default
@@ -105,11 +116,14 @@ function App() {
                 setLoading(false);
             }
         };
+
         verifyToken();
     }, [token]);
+
     const login = async (username, password) => {
         try {
             console.log(`Attempting login for user: ${username}`); // Debug log
+
             const response = await fetch(`${API_BASE_URL}/api/login`, {
                 method: 'POST',
                 headers: {
@@ -117,14 +131,18 @@ function App() {
                 },
                 body: JSON.stringify({ username, password }),
             });
+
             console.log(`Login response status: ${response.status}`); // Debug log
+
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('Login error response:', errorData); // Debug log
                 throw new Error(errorData.error || errorData.message || 'Login failed');
             }
+
             const data = await response.json();
             console.log('Login successful, received token:', data.token ? 'Yes' : 'No'); // Debug log
+
             setToken(data.token);
             setUser({ username: data.username, role: data.role });
             setIsAuthenticated(true);
@@ -137,12 +155,14 @@ function App() {
             return false;
         }
     };
+
     const logout = () => {
         setToken(null);
         setUser(null);
         setIsAuthenticated(false);
         localStorage.removeItem('token');
     };
+
     const removeDuplicateTickets = (tickets) => {
         const seen = new Set();
         return tickets.filter(ticket => {
@@ -151,6 +171,7 @@ function App() {
             return !duplicate;
         });
     };
+
     const fetchDeveloperPerformance = async (developerId) => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/developers/${developerId}/performance`);
@@ -165,6 +186,7 @@ function App() {
             setDeveloperPerformance(null);
         }
     };
+
     const handleCreateTicket = async (e) => {
         e.preventDefault();
         try {
@@ -175,6 +197,7 @@ function App() {
                 },
                 body: JSON.stringify(newTicket),
             });
+
             if (response.ok) {
                 const createdTicket = await response.json();
                 setTickets([...tickets, createdTicket]);
@@ -192,6 +215,7 @@ function App() {
             alert('Error creating ticket!');
         }
     };
+
     const handleAssignTicket = async (ticketId, developerId) => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/tickets/${ticketId}/assign`, {
@@ -201,19 +225,12 @@ function App() {
                 },
                 body: JSON.stringify({ developer_id: developerId }),
             });
+
             if (response.ok) {
-                // Fetch both tickets and developers to get updated data
-                const [ticketsResponse, developersResponse] = await Promise.all([
-                    apiRequest(`${API_BASE_URL}/api/tickets`),
-                    apiRequest(`${API_BASE_URL}/api/developers`)
-                ]);
-
+                const ticketsResponse = await apiRequest(`${API_BASE_URL}/api/tickets`);
                 const ticketsData = await ticketsResponse.json();
-                const developersData = await developersResponse.json();
                 const uniqueTickets = removeDuplicateTickets(ticketsData);
-
                 setTickets(uniqueTickets);
-                setDevelopers(developersData);
                 alert('Ticket assigned successfully!');
             }
         } catch (error) {
@@ -221,6 +238,7 @@ function App() {
             alert('Error assigning ticket!');
         }
     };
+
     const handleCompleteTicket = async (ticketId) => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/tickets/${ticketId}/complete`, {
@@ -230,19 +248,12 @@ function App() {
                 },
                 body: JSON.stringify(completeTicketData),
             });
+
             if (response.ok) {
-                // Fetch both tickets and developers to get updated data
-                const [ticketsResponse, developersResponse] = await Promise.all([
-                    apiRequest(`${API_BASE_URL}/api/tickets`),
-                    apiRequest(`${API_BASE_URL}/api/developers`)
-                ]);
-
+                const ticketsResponse = await apiRequest(`${API_BASE_URL}/api/tickets`);
                 const ticketsData = await ticketsResponse.json();
-                const developersData = await developersResponse.json();
                 const uniqueTickets = removeDuplicateTickets(ticketsData);
-
                 setTickets(uniqueTickets);
-                setDevelopers(developersData);
                 setSelectedTicket(null);
                 alert('Ticket completed successfully!');
             }
@@ -251,6 +262,7 @@ function App() {
             alert('Error completing ticket!');
         }
     };
+
     const handleGetRecommendations = async (ticketId) => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/tickets/${ticketId}/recommendations`);
@@ -273,6 +285,7 @@ function App() {
             alert('Error getting recommendations!');
         }
     };
+
     const handleSaveData = async () => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/system/save`, {
@@ -286,14 +299,17 @@ function App() {
             alert('Error saving data!');
         }
     };
+
     const handleProcessDocument = async (e) => {
         if (!documentPath) {
             alert('Please enter a document path');
             return;
         }
+
         const originalButtonText = e.target.textContent;
         e.target.textContent = 'Processing...';
         e.target.disabled = true;
+
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/process-document`, {
                 method: 'POST',
@@ -302,6 +318,7 @@ function App() {
                 },
                 body: JSON.stringify({ path: documentPath }),
             });
+
             const result = await response.json();
             if (response.ok && result.message === 'Document processed successfully') {
                 alert(`Document processed successfully!\n\nTasks Extracted: ${result.tasks_extracted}\nTickets Created: ${result.tickets_created}`);
@@ -318,14 +335,17 @@ function App() {
             e.target.disabled = false;
         }
     };
+
     const handleProcessSprintDocument = async (e) => {
         if (!sprintDocumentPath) {
             alert('Please enter a sprint document path');
             return;
         }
+
         const originalButtonText = e.target.textContent;
         e.target.textContent = 'Processing...';
         e.target.disabled = true;
+
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/process-sprint-document`, {
                 method: 'POST',
@@ -334,6 +354,7 @@ function App() {
                 },
                 body: JSON.stringify({ path: sprintDocumentPath }),
             });
+
             const result = await response.json();
             if (response.ok && result.message === 'Sprint document processed successfully') {
                 alert(`Sprint document processed successfully!\n\nSprint Goal: ${result.sprint_goal}\nUser Stories: ${result.user_stories.length}\nTasks Created: ${result.tickets_created}`);
@@ -350,11 +371,13 @@ function App() {
             e.target.disabled = false;
         }
     };
+
     const handleExportToJira = async (ticketId) => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/tickets/${ticketId}/export-jira`, {
                 method: 'POST'
             });
+
             if (response.ok) {
                 alert('Ticket exported to Jira successfully!');
                 const ticketsResponse = await apiRequest(`${API_BASE_URL}/api/tickets`);
@@ -369,11 +392,13 @@ function App() {
             alert('Error exporting ticket to Jira!');
         }
     };
+
     const handleOptimizeWorkload = async () => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/system/optimize-workload`, {
                 method: 'POST'
             });
+
             if (response.ok) {
                 const result = await response.json();
                 alert(`Workload optimized! ${result.assignments.length} tickets reassigned.`);
@@ -386,6 +411,7 @@ function App() {
             alert('Error optimizing workload!');
         }
     };
+
     const handleBalanceWorkload = async () => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/system/balance-workload`);
@@ -411,6 +437,7 @@ function App() {
             alert('Error analyzing workload balance!');
         }
     };
+
     const handleGenerateProgressReport = async () => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/system/progress-report`);
@@ -463,11 +490,13 @@ function App() {
             alert('Error generating progress report!');
         }
     };
+
     const handleAdjustPriorities = async () => {
         try {
             const response = await apiRequest(`${API_BASE_URL}/api/system/adjust-priorities`, {
                 method: 'POST'
             });
+
             if (response.ok) {
                 const result = await response.json();
                 if (result.adjustments.length > 0) {
@@ -488,24 +517,7 @@ function App() {
             alert('Error adjusting priorities!');
         }
     };
-    const handleResetTicketIds = async () => {
-        if (window.confirm('Are you sure you want to reset all ticket IDs to start from 1? This will update all ticket IDs but preserve all other data.')) {
-            try {
-                const response = await apiRequest(`${API_BASE_URL}/api/system/reset-ticket-ids`, {
-                    method: 'POST'
-                });
-                if (response.ok) {
-                    alert('Ticket IDs have been reset successfully!');
-                    fetchInitialData();
-                } else {
-                    alert('Error resetting ticket IDs!');
-                }
-            } catch (error) {
-                console.error('Error resetting ticket IDs:', error);
-                alert('Error resetting ticket IDs!');
-            }
-        }
-    };
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'backlog': return '#ffc107';
@@ -514,6 +526,7 @@ function App() {
             default: return '#6c757d';
         }
     };
+
     const getPriorityColor = (priority) => {
         switch (priority) {
             case 'critical': return '#dc3545';
@@ -523,6 +536,7 @@ function App() {
             default: return '#6c757d';
         }
     };
+
     const renderNavigation = () => (
         <div className="navigation-panel">
             <h2>Smart Sprint Menu</h2>
@@ -542,6 +556,7 @@ function App() {
             </div>
         </div>
     );
+
     const renderLoginForm = () => (
         <div className="login-form">
             <h2>Login to Smart Sprint</h2>
@@ -565,9 +580,11 @@ function App() {
             <p>Default credentials: admin/admin123 or user/user123</p>
         </div>
     );
+
     const renderDashboardView = () => (
         <Dashboard />
     );
+
     const renderTicketsView = () => (
         <div className="tickets-view">
             <h2>All Tickets</h2>
@@ -613,6 +630,7 @@ function App() {
             </div>
         </div>
     );
+
     const renderViewTicketView = () => {
         if (!selectedTicket) {
             return (
@@ -677,6 +695,7 @@ function App() {
             </div>
         );
     };
+
     const renderDevelopersView = () => (
         <div className="developers-view">
             <h2>All Developers</h2>
@@ -718,6 +737,7 @@ function App() {
             </div>
         </div>
     );
+
     const renderCreateTicketView = () => (
         <div className="create-ticket-view">
             <h2>Process New Feature Story</h2>
@@ -752,6 +772,7 @@ function App() {
             </form>
         </div>
     );
+
     const renderAssignTicketView = () => (
         <div className="assign-ticket-view">
             <h2>Get Recommendations, Estimate Timeline, and Assign Developer</h2>
@@ -824,6 +845,7 @@ function App() {
             )}
         </div>
     );
+
     const renderCompleteTicketView = () => (
         <div className="complete-ticket-view">
             <h2>Complete Ticket</h2>
@@ -873,6 +895,7 @@ function App() {
             )}
         </div>
     );
+
     const renderSystemStatusView = () => (
         <div className="system-status-view">
             <h2>System Status</h2>
@@ -890,10 +913,10 @@ function App() {
                 <button className="btn btn-secondary" onClick={handleBalanceWorkload}>Balance Workload Analysis</button>
                 <button className="btn btn-primary" onClick={handleGenerateProgressReport}>Generate Progress Report</button>
                 <button className="btn btn-secondary" onClick={handleAdjustPriorities}>Adjust Priorities Dynamically</button>
-                <button className="btn btn-warning" onClick={handleResetTicketIds}>Reset Ticket IDs</button>
             </div>
         </div>
     );
+
     const renderDeveloperPerformanceView = () => (
         <div className="developer-performance-view">
             <h2>Developer Performance</h2>
@@ -951,6 +974,7 @@ function App() {
             )}
         </div>
     );
+
     const renderProcessDocumentView = () => (
         <div className="process-document-view">
             <h2>Process Document</h2>
@@ -976,6 +1000,7 @@ function App() {
             </div>
         </div>
     );
+
     const renderProcessSprintDocumentView = () => (
         <div className="process-sprint-document-view">
             <h2>Process Sprint Document with User Stories</h2>
@@ -1013,6 +1038,7 @@ User Stories:
             </div>
         </div>
     );
+
     const renderSaveDataView = () => (
         <div className="save-data-view">
             <h2>Save Data Manually</h2>
@@ -1026,9 +1052,11 @@ User Stories:
             </div>
         </div>
     );
+
     if (loading) {
         return <div className="loading">Loading...</div>;
     }
+
     if (!isAuthenticated) {
         return (
             <div className="app">
@@ -1044,6 +1072,7 @@ User Stories:
             </div>
         );
     }
+
     return (
         <div className="app">
             <header className="app-header">
@@ -1076,4 +1105,5 @@ User Stories:
         </div>
     );
 }
+
 export default App;

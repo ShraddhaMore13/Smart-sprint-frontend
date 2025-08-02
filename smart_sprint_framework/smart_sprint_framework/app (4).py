@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request, send_from_directory
-from flask_cors import CORS
 import os
 import pandas as pd
 import numpy as np
@@ -7,26 +6,33 @@ import traceback
 from smart_sprint_system import SmartSprintSystem
 from nlp_pipeline import NLPPipeline
 from sprint_document_processor import SprintDocumentProcessor
-from auth import login_required, admin_required, verify_password, generate_token, users
+from auth import login_required, admin_required, verify_password, generate_token
 from error_handler import (
     handle_errors, ValidationError, AuthenticationError, 
     AuthorizationError, NotFoundError, ConflictError,
     validate_required_fields, validate_field_types, validate_positive_numbers
 )
 from dashboard_data import DashboardDataGenerator
+
 app = Flask(__name__)
-# Add a secret key for JWT token generation
-app.config['SECRET_KEY'] = 'your_secure_secret_key_here'  # Change this in production!
-# Enable CORS for all routes
-CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:3001"]}})
+
 # Initialize the system
 system = SmartSprintSystem()
 nlp = NLPPipeline()
 sprint_processor = SprintDocumentProcessor()
-# Debug logging setup
-import logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
+# In-memory user storage (in production, use a database)
+users = {
+    "admin": {
+        "password": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+        "role": "admin"
+    },
+    "user": {
+        "password": "793860fa51408bd7a5d3b4a518e5e8a9b7a5d3f5a5c5e5d5f5a5d5c5e5d5f5a5d5",
+        "role": "user"
+    }
+}
+
 @app.route('/api/login', methods=['POST'])
 @handle_errors
 def login():
@@ -34,20 +40,10 @@ def login():
     username = data.get('username')
     password = data.get('password')
     
-    logger.info(f"Login attempt for username: {username}")
-    logger.info(f"Provided password: {password}")
-    
     if not username or not password:
         raise ValidationError("Username and password are required")
     
-    # Log the stored hash for debugging
-    if username in users:
-        logger.info(f"Stored hash for {username}: {users[username]['password']}")
-    else:
-        logger.error(f"User {username} not found in database")
-    
     if verify_password(username, password):
-        logger.info(f"Login successful for {username}")
         token = generate_token(username)
         response = jsonify({
             "token": token,
@@ -56,14 +52,15 @@ def login():
         })
         return response
     else:
-        logger.warning(f"Login failed for {username}")
         raise AuthenticationError("Invalid username or password")
+
 @app.route('/api/tickets', methods=['GET'])
 @handle_errors
 @login_required
 def get_tickets():
     tickets = system.tickets
     return jsonify(tickets)
+
 @app.route('/api/tickets', methods=['POST'])
 @handle_errors
 @login_required
@@ -86,6 +83,7 @@ def create_ticket():
     
     ticket = system.process_feature_story(data)
     return jsonify(ticket), 201
+
 @app.route('/api/tickets/<int:ticket_id>', methods=['GET'])
 @handle_errors
 @login_required
@@ -94,12 +92,14 @@ def get_ticket(ticket_id):
     if not ticket:
         raise NotFoundError("Ticket", ticket_id)
     return jsonify(ticket)
+
 @app.route('/api/tickets/<int:ticket_id>/recommendations', methods=['GET'])
 @handle_errors
 @login_required
 def get_recommendations(ticket_id):
     recommendations = system.get_ticket_recommendations(ticket_id)
     return jsonify(recommendations)
+
 @app.route('/api/tickets/<int:ticket_id>/assign', methods=['POST'])
 @handle_errors
 @login_required
@@ -121,6 +121,7 @@ def assign_ticket(ticket_id):
         if not success:
             raise ConflictError("Assignment failed. Developer may not have enough availability.")
         return jsonify({'success': True})
+
 @app.route('/api/tickets/<int:ticket_id>/complete', methods=['POST'])
 @handle_errors
 @login_required
@@ -135,12 +136,14 @@ def complete_ticket(ticket_id):
     if success:
         return jsonify({'success': True})
     raise ConflictError("Completion failed. Check if ticket exists and is assigned.")
+
 @app.route('/api/developers', methods=['GET'])
 @handle_errors
 @login_required
 def get_developers():
     developers = system.developers
     return jsonify(developers)
+
 @app.route('/api/developers/<int:developer_id>/performance', methods=['GET'])
 @handle_errors
 @login_required
@@ -149,12 +152,14 @@ def get_developer_performance(developer_id):
     if performance:
         return jsonify(performance)
     raise NotFoundError("Developer performance data", developer_id)
+
 @app.route('/api/system/status', methods=['GET'])
 @handle_errors
 @login_required
 def get_system_status():
     status = system.get_system_status()
     return jsonify(status)
+
 @app.route('/api/system/save', methods=['POST'])
 @handle_errors
 @login_required
@@ -164,6 +169,7 @@ def save_system():
         return jsonify({'success': True})
     except Exception as e:
         raise ConflictError(str(e))
+
 @app.route('/api/nlp/analyze', methods=['POST'])
 @handle_errors
 @login_required
@@ -180,6 +186,7 @@ def analyze_text():
         'complexity': complexity,
         'sentiment': sentiment
     })
+
 @app.route('/api/process-document', methods=['POST'])
 @handle_errors
 @login_required
@@ -224,6 +231,7 @@ def process_document():
         app.logger.error(f"Error processing document: {str(e)}")
         app.logger.error(traceback.format_exc())
         raise ConflictError(f"Error processing document: {str(e)}")
+
 @app.route('/api/process-sprint-document', methods=['POST'])
 @handle_errors
 @login_required
@@ -270,6 +278,7 @@ def process_sprint_document():
         app.logger.error(f"Error processing sprint document: {str(e)}")
         app.logger.error(traceback.format_exc())
         raise ConflictError(f"Error processing sprint document: {str(e)}")
+
 @app.route('/api/tickets/<int:ticket_id>/export-jira', methods=['POST'])
 @handle_errors
 @login_required
@@ -278,6 +287,7 @@ def export_ticket_to_jira(ticket_id):
     if success:
         return jsonify({'success': True})
     raise ConflictError("Export failed")
+
 @app.route('/api/tickets/<int:ticket_id>/update-jira-status', methods=['POST'])
 @handle_errors
 @login_required
@@ -292,36 +302,42 @@ def update_jira_ticket_status(ticket_id):
     if success:
         return jsonify({'success': True})
     raise ConflictError("Update failed")
+
 @app.route('/api/system/optimize-workload', methods=['POST'])
 @handle_errors
 @login_required
 def optimize_workload():
     assignments = system.optimize_workload()
     return jsonify({'assignments': assignments})
+
 @app.route('/api/system/balance-workload', methods=['GET'])
 @handle_errors
 @login_required
 def balance_workload():
     balance_info = system.balance_workload()
     return jsonify(balance_info)
+
 @app.route('/api/system/progress-report', methods=['GET'])
 @handle_errors
 @login_required
 def get_progress_report():
     report = system.generate_progress_report()
     return jsonify(report)
+
 @app.route('/api/system/real-time-metrics', methods=['GET'])
 @handle_errors
 @login_required
 def get_real_time_metrics():
     metrics = system.get_real_time_metrics()
     return jsonify(metrics)
+
 @app.route('/api/system/adjust-priorities', methods=['POST'])
 @handle_errors
 @login_required
 def adjust_priorities():
     adjustments = system.adjust_priorities_dynamically()
     return jsonify({'adjustments': adjustments})
+
 @app.route('/api/dashboard', methods=['GET'])
 @handle_errors
 @login_required
@@ -333,6 +349,7 @@ def get_dashboard():
         system.performance_tracker.get_historical_performance_data()
     )
     return jsonify(dashboard_data)
+
 @app.route('/api/system/reset', methods=['POST'])
 @handle_errors
 @admin_required
@@ -341,20 +358,5 @@ def reset_system():
     system.__init__()
     return jsonify({"success": True})
 
-@app.route('/api/system/reset-ticket-ids', methods=['POST'])
-@handle_errors
-@admin_required
-def reset_ticket_ids():
-    # Reset ticket IDs to start from 1 and update performance data
-    success = system.reset_ticket_ids()
-    if success:
-        return jsonify({"success": True, "message": "Ticket IDs have been reset to start from 1"})
-    else:
-        return jsonify({"success": False, "message": "Failed to reset ticket IDs"})
-
-# Add a simple root route for testing
-@app.route('/')
-def index():
-    return jsonify({"message": "Smart Sprint API is running"})
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5000)

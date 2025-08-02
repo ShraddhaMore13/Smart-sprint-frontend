@@ -202,18 +202,10 @@ function App() {
                 body: JSON.stringify({ developer_id: developerId }),
             });
             if (response.ok) {
-                // Fetch both tickets and developers to get updated data
-                const [ticketsResponse, developersResponse] = await Promise.all([
-                    apiRequest(`${API_BASE_URL}/api/tickets`),
-                    apiRequest(`${API_BASE_URL}/api/developers`)
-                ]);
-
+                const ticketsResponse = await apiRequest(`${API_BASE_URL}/api/tickets`);
                 const ticketsData = await ticketsResponse.json();
-                const developersData = await developersResponse.json();
                 const uniqueTickets = removeDuplicateTickets(ticketsData);
-
                 setTickets(uniqueTickets);
-                setDevelopers(developersData);
                 alert('Ticket assigned successfully!');
             }
         } catch (error) {
@@ -231,18 +223,10 @@ function App() {
                 body: JSON.stringify(completeTicketData),
             });
             if (response.ok) {
-                // Fetch both tickets and developers to get updated data
-                const [ticketsResponse, developersResponse] = await Promise.all([
-                    apiRequest(`${API_BASE_URL}/api/tickets`),
-                    apiRequest(`${API_BASE_URL}/api/developers`)
-                ]);
-
+                const ticketsResponse = await apiRequest(`${API_BASE_URL}/api/tickets`);
                 const ticketsData = await ticketsResponse.json();
-                const developersData = await developersResponse.json();
                 const uniqueTickets = removeDuplicateTickets(ticketsData);
-
                 setTickets(uniqueTickets);
-                setDevelopers(developersData);
                 setSelectedTicket(null);
                 alert('Ticket completed successfully!');
             }
@@ -488,6 +472,7 @@ function App() {
             alert('Error adjusting priorities!');
         }
     };
+
     const handleResetTicketIds = async () => {
         if (window.confirm('Are you sure you want to reset all ticket IDs to start from 1? This will update all ticket IDs but preserve all other data.')) {
             try {
@@ -506,6 +491,7 @@ function App() {
             }
         }
     };
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'backlog': return '#ffc107';

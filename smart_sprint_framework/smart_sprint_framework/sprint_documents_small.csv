@@ -1,7 +1,208 @@
-id,title,description,priority,estimated_hours,complexity,status,tasks,assigned_to
-22,Test password reset functionality,Implement and test password reset functionality for the application.,medium,4.0,1,backlog,"Design password reset flow, Implement password reset request form, Create secure token generation, Implement email notification system, Develop password update page, Test password reset functionality",
-23,Add login page,Create a user login page with authentication.,medium,8.0,3,backlog,"Design login form, Implement authentication logic, Create session management, Develop logout functionality, Test authentication flow",
-24,Implement user authentication,Implement secure user authentication system.,high,10.0,4,backlog,"Design authentication architecture, Implement OAuth2 integration, Create session management, Develop password reset functionality, Test authentication security",
-25,Create user registration,Develop user registration functionality.,medium,12.0,3,backlog,"Design registration form, Implement user registration logic, Create email verification system, Develop registration confirmation page, Test registration process",
-26,Design user profile,Create user profile management system.,medium,14.0,3,backlog,"Design profile page, Implement profile updates, Add profile picture upload, Create privacy settings, Test profile functionality",
-27,Implement role-based access,Develop role-based access control system.,high,16.0,4,backlog,"Design permission system, Implement role management, Create access control UI, Add permission inheritance, Test access security",
+id,title,description,priority,complexity,estimated_hours,status,tasks,assigned_to
+1,Design database schema,Design and implement database schema for user profiles.,medium,3,18.8,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",2.0
+2,Create API endpoints,Create REST API endpoints for user management.,high,3,16.1,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",3.0
+3,Develop user dashboard,Develop user dashboard with analytics and visualization.,medium,4,22.5,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",10.0
+4,Implement payment gateway,Integrate third-party payment gateway for processing transactions.,high,5,31.9,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",1.0
+5,Add email notifications,Implement email notification system for user alerts and system notifications.,medium,3,16.5,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",7.0
+6,File upload functionality,Implement secure file upload and storage system with proper validation.,medium,3,22.0,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",4.0
+7,Search functionality,Create advanced search functionality with multiple filter options.,medium,3,14.4,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",9.0
+8,User profile management,Develop user profile management system with privacy settings.,medium,3,14.4,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+9,Role-based access control,Implement role-based access control system for securing application features.,high,4,27.7,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+10,Real-time chat feature,Implement real-time chat functionality using WebSockets.,low,5,27.6,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+11,Data export functionality,Implement functionality to export data in CSV and PDF formats.,low,2,13.3,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",5.0
+12,Mobile responsive design,Ensure all application components are fully responsive for mobile devices.,medium,3,26.3,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+13,Performance optimization,Optimize application performance for better user experience.,medium,4,20.6,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+14,Security audit,Conduct comprehensive security audit and implement necessary fixes.,high,5,24.2,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",6.0
+15,Implement caching,Implement caching mechanism to improve application performance.,medium,3,14.8,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",7.0
+16,Create admin panel,Develop admin panel for system management and monitoring.,medium,4,23.7,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+17,Add reporting feature,Implement reporting feature for generating various reports.,low,3,19.0,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",3.0
+18,Implement logging system,Implement comprehensive logging system for debugging and monitoring.,medium,2,16.6,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+19,Create backup system,Implement automated backup system for data protection.,high,4,19.0,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",10.0
+20,Implement user registration,Develop user registration functionality with email verification.,medium,3,16.1,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+21,Add password reset,Implement secure password reset functionality with email notifications.,medium,2,12.3,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",6.0
+22,Create login page,Design and implement user login page with authentication.,medium,2,8.4,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+23,Implement session management,Create secure session management system for user authentication.,high,4,15.6,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",4.0
+24,Add two-factor authentication,Implement two-factor authentication for enhanced security.,medium,4,17.4,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",7.0
+25,Create user settings page,Develop user settings page for profile management.,low,2,12.2,completed,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",9.0
+26,Implement data validation,Add comprehensive data validation for all user inputs.,medium,3,14.8,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",2.0
+27,Create error handling,Implement robust error handling throughout the application.,medium,3,14.0,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+28,Add unit tests,Write comprehensive unit tests for core functionality.,medium,3,26.1,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+29,Implement API rate limiting,Add rate limiting to API endpoints to prevent abuse.,medium,2,8.9,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",5.0
+30,Create documentation,Write comprehensive documentation for the application.,low,2,20.8,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",8.0
+31,Implement search filters,Add advanced filtering options to the search functionality.,low,2,13.9,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",8.0
+32,Add data analytics,Implement data analytics features for the dashboard.,medium,4,25.4,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+33,Create notification system,Implement in-app notification system for user alerts.,medium,3,14.8,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+34,Add dark mode,Implement dark mode theme for the application.,low,1,7.8,backlog,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",
+35,Implement data encryption,Add encryption for sensitive data storage.,high,4,17.2,in_progress,"Analyze requirements, Design solution, Implement core functionality, Test implementation, Document solution",10.0
+36,Design password reset flow,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+37,Implement password reset request form,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,in_progress,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",5.0
+38,Create secure token generation,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,14.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+39,Implement email notification system,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,17.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+40,Develop password update page,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",high,2,21.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+41,Test password reset functionality,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+42,Auth User Authentication,"## Overview
+Implement secure user authentication with OAuth and password reset functionality.
+
+## Requirements
+- Secure user authentication
+- Session management
+- Password encryption
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",high,2,19.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+43,Design password reset flow,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+44,Implement password reset request form,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+45,Create secure token generation,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,15.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+46,Implement email notification system,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,14.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+47,Develop password update page,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",high,2,20.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",
+48,Test password reset functionality,"## Overview
+Task for sprint: Enable users to reset their passwords through email.
+
+## Requirements
+
+## Acceptance Criteria
+1. Design password reset flow
+2. Implement password reset request
+3. Create secure token generation
+4. Implement email notification
+5. Develop password update page
+6. Test password reset functionality
+",medium,1,16.0,backlog,"Design password reset flow, Implement password reset request, Create secure token generation, Implement email notification, Develop password update page, Test password reset functionality",

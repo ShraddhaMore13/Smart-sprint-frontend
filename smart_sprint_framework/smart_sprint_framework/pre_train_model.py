@@ -1,22 +1,14 @@
-# pre_train_model.py
 import os
 import sys
-import pandas as pd
-import numpy as np
 from smart_sprint_system import SmartSprintSystem
-from training_module import TrainingModule
-from data_generator import generate_developers_csv, generate_sprint_documents_csv, generate_performance_data
-
 def main():
     print("Smart Sprint Model Pre-training")
     print("=" * 50)
     
-    # Generate large dataset for training
-    print("Generating large dataset for training...")
-    generate_developers_csv()
-    generate_sprint_documents_csv()
-    generate_performance_data()
-    print("Large dataset generated successfully.")
+    # Create models directory if it doesn't exist
+    if not os.path.exists('models'):
+        os.makedirs('models')
+        print("Created models directory.")
     
     # Initialize the system with large dataset
     print("Initializing system with large dataset...")
@@ -48,7 +40,7 @@ def main():
         
         # Now generate the small dataset for the actual system
         print("\nGenerating small dataset for the system...")
-        from data_generator import generate_small_developers_csv, generate_small_sprint_documents_csv, generate_small_performance_data
+        from generate_small_dataset import generate_small_developers_csv, generate_small_sprint_documents_csv, generate_small_performance_data
         generate_small_developers_csv()
         generate_small_sprint_documents_csv()
         generate_small_performance_data()
@@ -58,6 +50,5 @@ def main():
         print("The system is now ready with pre-trained models and a small dataset.")
     else:
         print("\nFailed to train models.")
-
 if __name__ == "__main__":
     main()

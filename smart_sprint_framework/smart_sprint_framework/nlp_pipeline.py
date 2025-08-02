@@ -3,27 +3,28 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassifica
 import torch
 
 class NLPPipeline:
-   def __init__(self):
-    # Priority keywords (fallback)
-    self.priority_keywords = {
-        'high': ['high', 'critical', 'urgent', 'asap', 'immediately', 'important'],
-        'medium': ['medium', 'normal', 'regular', 'standard'],
-        'low': ['low', 'minor', 'optional', 'later', 'nice-to-have']
-    }
     
-    # Complexity indicators (fallback)
-    self.complexity_keywords = {
-        'high': ['complex', 'complicated', 'difficult', 'challenging', 'advanced', 
-                'multiple', 'integrate', 'scalable', 'distributed', 'enterprise'],
-        'medium': ['moderate', 'several', 'some', 'few', 'update', 'improve'],
-        'low': ['simple', 'basic', 'easy', 'straightforward', 'single', 'minor']
-    }
     
-    # Skip loading BERT-based models to avoid torch issues
-    self.advanced_nlp = False
-    print("Using rule-based NLP processing (BERT models disabled)")
+    def __init__(self):
+        # Priority keywords (fallback)
+        self.priority_keywords = {
+            'high': ['high', 'critical', 'urgent', 'asap', 'immediately', 'important'],
+            'medium': ['medium', 'normal', 'regular', 'standard'],
+            'low': ['low', 'minor', 'optional', 'later', 'nice-to-have']
+        }
+        
+        # Complexity indicators (fallback)
+        self.complexity_keywords = {
+            'high': ['complex', 'complicated', 'difficult', 'challenging', 'advanced', 
+                    'multiple', 'integrate', 'scalable', 'distributed', 'enterprise'],
+            'medium': ['moderate', 'several', 'some', 'few', 'update', 'improve'],
+            'low': ['simple', 'basic', 'easy', 'straightforward', 'single', 'minor']
+        }
+        
+        # Skip loading BERT-based models to avoid torch issues
+        self.advanced_nlp = False
+        print("Using rule-based NLP processing (BERT models disabled)")
     
-
     def extract_entities(self, text):
         """Extract entities like priorities, dependencies, deadlines from text"""
         entities = {
